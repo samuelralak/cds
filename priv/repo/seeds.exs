@@ -2,10 +2,21 @@
 #
 #     mix run priv/repo/seeds.exs
 #
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     Cds.Repo.insert!(%Cds.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+
+
+import Ecto.Query
+
+alias Cds.Repo
+alias Cds.Accounts.Role
+
+roles = ["admin", "moderator", "member"]
+Enum.map(roles, fn role ->
+    case Repo.all(from r in Role, where: r.code == ^String.upcase(role)) do
+        [] ->
+            %Role{}
+            |> Role.changeset(%{name: role, code: String.upcase(role), is_active: true})
+            |> Repo.insert!()
+        _ ->
+            IO.puts "Role: #{role} already exists"
+    end
+end)
