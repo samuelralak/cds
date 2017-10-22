@@ -8,6 +8,8 @@ defmodule Cds.Accounts.Role do
 		field :is_active, :boolean, default: false
 		field :name, :string
 
+		has_many :users, Cds.Accounts.User
+
 		timestamps()
 	end
 

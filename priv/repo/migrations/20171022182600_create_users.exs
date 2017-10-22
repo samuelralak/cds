@@ -5,6 +5,7 @@ defmodule Cds.Repo.Migrations.CreateUsers do
 		create table(:users) do
 			add :first_name, :string
 			add :last_name, :string
+			add :email, :string
 			add :password_digest, :string
 			add :role_id, references(:roles, on_delete: :nothing)
 

@@ -8,6 +8,7 @@ import Ecto.Query
 
 alias Cds.Repo
 alias Cds.Accounts.Role
+alias Cds.Accounts.User
 
 roles = ["admin", "moderator", "member"]
 Enum.map(roles, fn role ->
@@ -20,3 +21,12 @@ Enum.map(roles, fn role ->
             IO.puts "Role: #{role} already exists"
     end
 end)
+
+admin = Repo.get_by!(Role, code: "ADMIN")
+attrs = %{email: "admin@cds.com", password: "123456",  password_confirmation: "123456"}
+unless Repo.get_by(User, email: attrs.email) do
+	admin
+	|> Ecto.build_assoc(:users)
+	|> User.create_changeset(attrs)
+	|> Repo.insert!
+end
