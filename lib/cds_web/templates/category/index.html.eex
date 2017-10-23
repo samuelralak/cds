@@ -1,0 +1,29 @@
+<h3>
+	<small class="pull-right">
+		<%= link "+ new category", to: category_path(@conn, :new) %>
+	</small>
+	
+	Categories
+</h3>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Code</th>
+			<th></th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<%= for category <- @categories  do %>
+			<tr>
+				<td><%= category.name %></td>
+				<td><%= category.code %></td>
+				<td>
+					<a href="#">edit</a> &nbsp;&nbsp;
+					<a href="#" class="text-danger">delete</a>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

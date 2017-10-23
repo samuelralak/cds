@@ -4,7 +4,8 @@ defmodule CdsWeb.CategoryController do
 	alias Cds.Listings.Category
 
 	def index(conn, _) do
-		render conn, "index.html"
+		categories = Listings.list_categories
+		render conn, "index.html", categories: categories
 	end
 
 	def new(conn, _) do
@@ -14,7 +15,7 @@ defmodule CdsWeb.CategoryController do
 
 	def create(conn, %{"category" => category_params}) do
 		case Listings.create_category(category_params) do
-			{:ok, category} ->
+			{:ok, _category} ->
 				conn
 				|> put_flash(:info, "Category successfully.")
 				|> redirect(to: category_path(conn, :index))
