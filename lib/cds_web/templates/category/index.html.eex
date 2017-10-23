@@ -21,7 +21,7 @@
 				<td><%= category.code %></td>
 				<td>
 					<%= link "edit", to: category_path(@conn, :edit, category) %> &nbsp;&nbsp;
-					<a href="#" class="text-danger">delete</a>
+					<%= link "delete", to: category_path(@conn, :delete, category), method: :delete, data: [confirm: "Are you sure?"], class: "text-danger" %>
 				</td>
 			</tr>
 		<% end %>

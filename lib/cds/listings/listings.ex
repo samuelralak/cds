@@ -26,4 +26,8 @@ defmodule Cds.Listings do
 		|> Category.changeset(attrs)
 		|> Repo.update
 	end
+
+	def delete_category(category) do
+		Repo.delete(category)
+	end
 end

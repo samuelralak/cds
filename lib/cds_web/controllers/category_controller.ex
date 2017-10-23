@@ -17,7 +17,7 @@ defmodule CdsWeb.CategoryController do
 		case Listings.create_category(category_params) do
 			{:ok, _category} ->
 				conn
-				|> put_flash(:info, "Category successfully.")
+				|> put_flash(:info, "Category added successfully.")
 				|> redirect(to: category_path(conn, :index))
 			{:error, changeset} ->
 				render(conn, "new.html", changeset: changeset)
@@ -40,6 +40,15 @@ defmodule CdsWeb.CategoryController do
 				|> redirect(to: category_path(conn, :index))
 			{:error, %Ecto.Changeset{} = changeset} ->
 				render(conn, "edit.html", category: category, changeset: changeset)
-      end
+		end
     end
+
+	def delete(conn, %{"id" => id}) do
+		category = Listings.get_category!(id)
+		{:ok, _category} = Listings.delete_category(category)
+
+		conn
+		|> put_flash(:info, "Category deleted successfully.")
+		|> redirect(to: category_path(conn, :index))
+	end
 end
