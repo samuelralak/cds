@@ -16,5 +16,15 @@ defmodule Cds.Listings.Category do
 		category
 		|> cast(attrs, [:name])
 		|> validate_required([:name])
-  end
+		|> assign_code
+	end
+
+	defp assign_code(changeset) do
+		if code = get_change(changeset, :name) do
+			changeset
+			|> put_change(:code, code |> String.upcase |> String.replace(" ", "-"))
+		else
+			changeset
+		end
+	end
 end

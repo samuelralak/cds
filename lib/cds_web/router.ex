@@ -17,8 +17,13 @@ defmodule CdsWeb.Router do
 		pipe_through :browser # Use the default browser stack
 
 		get "/", PageController, :index
-		get "/login", SessionController, :new
+
+		# session routes
+		get  "/login", SessionController, :new
 		post "/login", SessionController, :create
+
+		# categories routes
+		resources "/categories", CategoryController
 	end
 
 	# Other scopes may use custom stacks.
