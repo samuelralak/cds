@@ -2,7 +2,7 @@
 	<small class="pull-right">
 		<%= link "+ new category", to: category_path(@conn, :new) %>
 	</small>
-	
+
 	Categories
 </h3>
 <table class="table table-striped">
@@ -20,7 +20,7 @@
 				<td><%= category.name %></td>
 				<td><%= category.code %></td>
 				<td>
-					<a href="#">edit</a> &nbsp;&nbsp;
+					<%= link "edit", to: category_path(@conn, :edit, category) %> &nbsp;&nbsp;
 					<a href="#" class="text-danger">delete</a>
 				</td>
 			</tr>

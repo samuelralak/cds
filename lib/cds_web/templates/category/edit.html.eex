@@ -1,0 +1,8 @@
+<h3>
+	<small class="pull-right">
+		<%= link "Back", to: category_path(@conn, :index) %>
+	</small>
+	Edit Category
+</h3>
+
+<%= render "form.html", changeset: @changeset, action: category_path(@conn, :update, @category) %>

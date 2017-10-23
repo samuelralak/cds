@@ -7,6 +7,10 @@ defmodule Cds.Listings do
     alias Cds.Repo
     alias Cds.Listings.Category
 
+	def get_category!(id) do
+		Repo.get!(Category, id)
+	end
+
 	def list_categories do
 		Repo.all(Category)
 	end
@@ -16,4 +20,10 @@ defmodule Cds.Listings do
 		|> Category.changeset(attrs)
 		|> Repo.insert
     end
+
+	def update_category(category, attrs) do
+		category
+		|> Category.changeset(attrs)
+		|> Repo.update
+	end
 end

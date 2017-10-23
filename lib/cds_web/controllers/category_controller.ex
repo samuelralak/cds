@@ -23,4 +23,23 @@ defmodule CdsWeb.CategoryController do
 				render(conn, "new.html", changeset: changeset)
 	    end
 	end
+
+	def edit(conn, %{"id" => id}) do
+		category = Listings.get_category!(id)
+	    changeset = Category.changeset(category, %{})
+	    render(conn, "edit.html", category: category, changeset: changeset)
+	end
+
+	def update(conn, %{"id" => id, "category" => category_params}) do
+		category = Listings.get_category!(id)
+
+		case Listings.update_category(category, category_params) do
+			{:ok, _category} ->
+				conn
+				|> put_flash(:info, "Category updated successfully.")
+				|> redirect(to: category_path(conn, :index))
+			{:error, %Ecto.Changeset{} = changeset} ->
+				render(conn, "edit.html", category: category, changeset: changeset)
+      end
+    end
 end
