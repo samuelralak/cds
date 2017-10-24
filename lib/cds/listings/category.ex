@@ -1,5 +1,6 @@
 defmodule Cds.Listings.Category do
 	use Ecto.Schema
+	import Ecto.Query
 	import Ecto.Changeset
 	alias Cds.Listings.Category
 	alias Cds.Listings.Business
@@ -20,6 +21,14 @@ defmodule Cds.Listings.Category do
 		|> validate_required([:name])
 		|> assign_code
 	end
+
+	def alphabetical(query) do
+        from c in query, order_by: c.name
+    end
+
+    def names_and_ids(query) do
+        from c in query, select: {c.name, c.id}
+    end
 
 	defp assign_code(changeset) do
 		if code = get_change(changeset, :name) do

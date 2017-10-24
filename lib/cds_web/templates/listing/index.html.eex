@@ -1,0 +1,11 @@
+<h3>
+	<small class="pull-right">
+		<%= link "+ new listing", to: listing_path(@conn, :new) %>
+	</small>
+
+	Listings
+</h3>
+<%= for l <- @listings do %>
+	<%= l.name %>
+	categories: <%= Enum.map_join(l.categories, ", ", &(&1.name))%>
+<%= end %>

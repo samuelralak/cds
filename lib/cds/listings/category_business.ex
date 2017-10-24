@@ -14,7 +14,7 @@ defmodule Cds.Listings.CategoryBusiness do
 	@doc false
 	def changeset(%CategoryBusiness{} = category_business, attrs) do
 		category_business
-		|> cast(attrs, [])
+		|> cast(attrs, [:category_id, :business_id])
 		|> validate_required([])
 	end
 end
