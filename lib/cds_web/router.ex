@@ -23,7 +23,10 @@ defmodule CdsWeb.Router do
 		post "/login", SessionController, :create
 
 		# categories routes
-		resources "/categories", CategoryController
+		resources "/categories", CategoryController, except: [:show]
+
+		# listings routes
+		resources "/listings", ListingController
 	end
 
 	# Other scopes may use custom stacks.
