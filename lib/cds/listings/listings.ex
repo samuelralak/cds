@@ -50,4 +50,13 @@ defmodule Cds.Listings do
 		|> Business.changeset(attrs)
 		|> Repo.insert
 	end
+
+	def search(term) do
+		formatted = term |> String.replace(" ", "|")
+		Repo.execute_and_load(
+			"SELECT * FROM businesses WHERE id IN (
+				SELECT searchable_id FROM searches
+				WHERE to_tsvector('english', term) @@ to_tsquery($1));
+			", [ formatted ], Business)
+	end
 end
