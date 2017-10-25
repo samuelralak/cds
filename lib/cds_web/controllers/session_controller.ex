@@ -13,7 +13,7 @@ defmodule CdsWeb.SessionController do
 			{:ok, _user} ->
 				conn
                 |> put_flash(:info, "Sign in successful!")
-                |> redirect(to: page_path(conn, :index))
+                |> redirect(to: listing_path(conn, :index))
 			{:error, _} ->
 				conn
 				|> put_flash(:error, "Invalid login details!")

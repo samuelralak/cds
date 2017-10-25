@@ -16,7 +16,7 @@ defmodule CdsWeb.Router do
 	scope "/", CdsWeb do
 		pipe_through :browser # Use the default browser stack
 
-		get "/", PageController, :index
+		get "/", ListingController, :index
 
 		# session routes
 		get  "/login", SessionController, :new
@@ -26,7 +26,7 @@ defmodule CdsWeb.Router do
 		resources "/categories", CategoryController, except: [:show]
 
 		# listings routes
-		resources "/listings", ListingController
+		resources "/listings", ListingController, except: [:index]
 	end
 
 	# Other scopes may use custom stacks.
