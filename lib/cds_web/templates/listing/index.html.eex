@@ -1,11 +1,32 @@
 <h3>
 	<small class="pull-right">
-		<%= link "+ new listing", to: listing_path(@conn, :new) %>
+		<%= if(Guardian.Plug.current_resource(@conn), do: (link "+ new listing", to: listing_path(@conn, :new))) %>
 	</small>
 
 	Listings
 </h3>
 <%= for l <- @listings do %>
-	<%= l.name %>
-	categories: <%= Enum.map_join(l.categories, ", ", &(&1.name))%>
+	<div class="well">
+		<h4>
+			<div class="pull-right">
+				<%= link "view", to: listing_path(@conn, :show, l) %> &nbsp;
+				<%= if (Guardian.Plug.current_resource(@conn)) do %>
+					<%= link "edit", to: listing_path(@conn, :edit, l) %> &nbsp;
+					<%= link "delete", to: listing_path(@conn, :delete, l), method: :delete, data: [confirm: "Are you sure?"], class: "text-danger" %>
+				<% end %>
+			</div>
+
+			<%= l.name %><%= if(Guardian.Plug.current_resource(@conn), do: ("- (VIEWS: #{l.view_count})")) %>
+		</h4>
+		<hr>
+		<p>
+			<%= l.description %>
+		</p>
+		<hr>
+		<small class="text-muted">
+			<strong>categories:</strong> <%= Enum.map_join(l.categories, ", ", &(&1.name))%>
+		</small>
+	</div>
+
+
 <%= end %>

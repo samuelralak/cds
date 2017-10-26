@@ -1,6 +1,21 @@
 <h3>
+	<div class="pull-right">
+		<%= link "Listings", to: listing_path(@conn, :index) %>
+	</div>
 	Search results for '<i><%= @query %></i>'
 </h3>
 <%= for l <- @results do %>
-	<%= l.name %>
+	<div class="well">
+		<h4>
+			<%= link "view", to: listing_path(@conn, :show, l), class: "pull-right" %>
+			<%= l.name %>
+		</h4>
+		<hr>
+		<p>
+			<%= l.description %>
+		</p>
+
+	</div>
+
+
 <%= end %>

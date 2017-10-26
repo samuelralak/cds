@@ -9,7 +9,7 @@ defmodule Cds.Listings.Category do
 		field :code, :string
 		field :is_active, :boolean, default: true
 		field :name, :string
-		many_to_many :businesses, Business, join_through: "categories_businesses"
+		many_to_many :businesses, Business, join_through: Cds.Listings.CategoryBusiness
 
 		timestamps()
 	end

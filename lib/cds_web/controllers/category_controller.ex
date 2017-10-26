@@ -43,12 +43,4 @@ defmodule CdsWeb.CategoryController do
 		end
     end
 
-	def delete(conn, %{"id" => id}) do
-		category = Listings.get_category!(id)
-		{:ok, _category} = Listings.delete_category(category)
-
-		conn
-		|> put_flash(:info, "Category deleted successfully.")
-		|> redirect(to: category_path(conn, :index))
-	end
 end

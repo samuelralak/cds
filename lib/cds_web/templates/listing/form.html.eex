@@ -13,7 +13,7 @@
 
 	<div class="form-group">
 		<%= label f, :category, class: "control-label" %>
-		<%= multiple_select f, :category_ids, @categories, class: "form-control" %>
+		<%= multiple_select f, :category_ids, @categories, selected: selected(assigns[:listing]), class: "form-control" %>
 		<%= error_tag f, :category_ids %>
 	</div>
 

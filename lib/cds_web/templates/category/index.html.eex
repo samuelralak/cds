@@ -20,8 +20,7 @@
 				<td><%= category.name %></td>
 				<td><%= category.code %></td>
 				<td>
-					<%= link "edit", to: category_path(@conn, :edit, category) %> &nbsp;&nbsp;
-					<%= link "delete", to: category_path(@conn, :delete, category), method: :delete, data: [confirm: "Are you sure?"], class: "text-danger" %>
+					<%= link "edit", to: category_path(@conn, :edit, category) %>
 				</td>
 			</tr>
 		<% end %>

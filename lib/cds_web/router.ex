@@ -43,7 +43,7 @@ defmodule CdsWeb.Router do
 	scope "/admin", CdsWeb do
 		pipe_through [:browser, :authenticate_user, :authorize_user]
 
-		resources "/categories", CategoryController, except: [:show]
+		resources "/categories", CategoryController, except: [:show, :delete]
 		resources "/listings", ListingController, except: [:index, :show]
 	end
 

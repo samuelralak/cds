@@ -57,6 +57,10 @@ defmodule Cds.Listings do
 		Repo.delete(category)
 	end
 
+	def delete_listing(business) do
+		Repo.delete(business)
+	end
+
 	def create_business(attrs) do
 		%Business{}
 		|> Business.changeset(attrs)

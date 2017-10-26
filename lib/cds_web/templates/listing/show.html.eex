@@ -1,1 +1,19 @@
-<%= @listing.name %>
+<h4>
+	<div class="pull-right">
+		<%= link "Listings", to: listing_path(@conn, :index) %>
+	</div>
+	<%= @listing.name %><%= if(Guardian.Plug.current_resource(@conn), do: ("- (VIEWS: #{@listing.view_count})")) %><br>
+	<small><%= Enum.map_join(@listing.categories, ", ", &(&1.name))%></small>
+</h4>
+<hr>
+<h5>Description:</h5>
+<p>
+	<%= @listing.description %>
+</p>
+
+<div class="well">
+	<b>Phone number: </b> <%= @listing.phone_number %><br>
+	<b>Email: </b> <%= @listing.email %><br>
+	<b>Address: </b> <%= @listing.address %><br>
+	<b>Website url: </b> <%= @listing.website_url %><br>
+</div>

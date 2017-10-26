@@ -16,6 +16,9 @@
 			<header class="header">
 				<nav role="navigation">
 					<ul class="nav nav-pills pull-right">
+						<li>
+							<%= link "Listings", to: listing_path(@conn, :index) %>
+						</li>
 						<%= if is_nil(Guardian.Plug.current_resource(@conn)) do %>
 							<li>
 								<%= link "Log in", to: session_path(@conn, :new) %>

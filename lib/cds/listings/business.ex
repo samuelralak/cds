@@ -14,7 +14,7 @@ defmodule Cds.Listings.Business do
 		field :view_count, :integer
 		field :category_ids, {:array, :string}, virtual: true
 		has_many :views, Cds.Listings.View
-		many_to_many :categories, Category, join_through: Cds.Listings.CategoryBusiness
+		many_to_many :categories, Category, join_through: Cds.Listings.CategoryBusiness, on_delete: :delete_all, on_replace: :delete 
 		timestamps()
 	end
 
@@ -31,6 +31,7 @@ defmodule Cds.Listings.Business do
 		business
 		|> cast(attrs, @default)
 		|> validate_required([:name, :description])
+		|> add_categories_assoc
 	end
 
 	defp add_categories_assoc(changeset) do
