@@ -15,6 +15,7 @@
 		<%= label f, :category, class: "control-label" %>
 		<%= multiple_select f, :category_ids, @categories, selected: selected(assigns[:listing]), class: "form-control" %>
 		<%= error_tag f, :category_ids %>
+		<i>*Hold Ctrl while clicking to select multiple</i>
 	</div>
 
 	<div class="form-group">

@@ -23,7 +23,7 @@ Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
 ```
 curl -X GET \
-  'http://localhost:4000/api/search?query=text' \
+  'https://cds-classic.herokuapp.com/api/search?query=text' \
   -H 'accept: application/json' \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json'
