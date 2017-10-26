@@ -1,35 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
 
-    <title>Hello Cds!</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-  </head>
+		<title>Hello Cds!</title>
+		<link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+	</head>
 
-  <body>
-    <div class="container">
-      <header class="header">
-        <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-          </ul>
-        </nav>
-        <span class="logo"></span>
-      </header>
+	<body>
+		<div class="container">
+			<header class="header">
+				<nav role="navigation">
+					<ul class="nav nav-pills pull-right">
+						<li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
+					</ul>
+				</nav>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+				<span class="logo">
+					<%= form_for @conn, listing_path(@conn, :search), [as: :search, method: :get, class: "navbar-form"], fn f -> %>
+						<div class="form-group">
+							<%= text_input f, :query, class: "form-control", placeholder: "search..." %>
+						</div>
+						<%= submit "Search", class: "btn btn-default" %>
+					<% end %>
+				</span>
+			</header>
 
-      <main role="main">
-        <%= render @view_module, @view_template, assigns %>
-      </main>
+			<p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+			<p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
-    </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-  </body>
+			<main role="main">
+				<%= render @view_module, @view_template, assigns %>
+			</main>
+		</div> <!-- /container -->
+		<script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+	</body>
 </html>

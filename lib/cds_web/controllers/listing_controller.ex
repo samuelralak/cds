@@ -7,7 +7,6 @@ defmodule CdsWeb.ListingController do
 
 	def index(conn, _) do
 		listings = Listings.get_listings
-		IO.inspect listings
 		render conn, "index.html", listings: listings
 	end
 
@@ -25,6 +24,11 @@ defmodule CdsWeb.ListingController do
 			{:error, changeset} ->
 				render(conn, "new.html", changeset: changeset)
 		end
+	end
+
+	def search(conn, %{"search" => %{"query" => query}}) do
+		results = Listings.search(query)
+		render conn, "search.html", results: results, query: query
 	end
 
 	defp load_categories(conn, _) do

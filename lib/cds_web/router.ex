@@ -27,10 +27,13 @@ defmodule CdsWeb.Router do
 
 		# listings routes
 		resources "/listings", ListingController, except: [:index]
+
+		# Search path
+		get "/search", ListingController, :search
 	end
 
-	# Other scopes may use custom stacks.
-	# scope "/api", CdsWeb do
-	#   pipe_through :api
-	# end
+	scope "/api", CdsWeb do
+		pipe_through :api
+		get "/search", SearchController,  :index
+	end
 end
