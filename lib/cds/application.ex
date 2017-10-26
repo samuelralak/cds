@@ -12,6 +12,7 @@ defmodule Cds.Application do
       supervisor(Cds.Repo, []),
       # Start the endpoint when the application starts
       supervisor(CdsWeb.Endpoint, []),
+	  worker(Cds.TrackListingView, [])
       # Start your own worker by calling: Cds.Worker.start_link(arg1, arg2, arg3)
       # worker(Cds.Worker, [arg1, arg2, arg3]),
     ]

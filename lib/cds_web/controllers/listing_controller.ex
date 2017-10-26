@@ -4,6 +4,7 @@ defmodule CdsWeb.ListingController do
 	alias Cds.Listings.Business
 
 	plug :load_categories when action in [:new, :create]
+	plug :track_views
 
 	def index(conn, _) do
 		listings = Listings.get_listings
@@ -34,5 +35,11 @@ defmodule CdsWeb.ListingController do
 	defp load_categories(conn, _) do
 		categories = Listings.load_categories
 		assign(conn, :categories, categories)
+	end
+
+	defp track_views(conn, _) do
+		remote_ip = to_string(:inet_parse.ntoa(conn.remote_ip))
+		Cds.TrackListingView.track(remote_ip)
+		conn
 	end
 end
