@@ -4,11 +4,16 @@ defmodule CdsWeb.ListingController do
 	alias Cds.Listings.Business
 
 	plug :load_categories when action in [:new, :create]
-	plug :track_views
+	plug :track_views when action in [:show]
 
 	def index(conn, _) do
 		listings = Listings.get_listings
 		render conn, "index.html", listings: listings
+	end
+
+	def show(conn, %{"id" => id}) do
+		listing = Listings.get_listing!(id)
+		render conn, "show.html", listing: listing
 	end
 
 	def new(conn, _) do
@@ -39,7 +44,7 @@ defmodule CdsWeb.ListingController do
 
 	defp track_views(conn, _) do
 		remote_ip = to_string(:inet_parse.ntoa(conn.remote_ip))
-		Cds.TrackListingView.track(remote_ip)
+		Cds.TrackListingView.track({remote_ip, conn.params["id"]})
 		conn
 	end
 end

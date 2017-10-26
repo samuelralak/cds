@@ -18,6 +18,12 @@ defmodule Cds.Listings do
 		Repo.get!(Category, id)
 	end
 
+	def get_listing!(id) do
+		Business
+		|> preload(:categories)
+		|> Repo.get!(id)
+	end
+
 	def list_categories do
 		Repo.all(Category)
 	end
@@ -38,6 +44,12 @@ defmodule Cds.Listings do
 	def update_category(category, attrs) do
 		category
 		|> Category.changeset(attrs)
+		|> Repo.update
+	end
+
+	def update_listing(business, attrs) do
+		business
+		|> Business.update_changeset(attrs)
 		|> Repo.update
 	end
 

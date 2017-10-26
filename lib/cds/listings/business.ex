@@ -11,18 +11,26 @@ defmodule Cds.Listings.Business do
 		field :name, :string
 		field :phone_number, :string
 		field :website_url, :string
+		field :view_count, :integer
 		field :category_ids, {:array, :string}, virtual: true
+		has_many :views, Cds.Listings.View
 		many_to_many :categories, Category, join_through: Cds.Listings.CategoryBusiness
 		timestamps()
 	end
 
-	@default [:name, :description, :email, :phone_number, :address, :category_ids, :website_url]
+	@default [:name, :description, :email, :phone_number, :address, :category_ids, :website_url, :view_count]
 	@doc false
 	def changeset(%Business{} = business, attrs) do
 		business
 		|> cast(attrs, @default)
 		|> validate_required(@default)
 		|> add_categories_assoc
+	end
+
+	def update_changeset(business, attrs) do
+		business
+		|> cast(attrs, @default)
+		|> validate_required([:name, :description])
 	end
 
 	defp add_categories_assoc(changeset) do
