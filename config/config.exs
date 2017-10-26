@@ -17,10 +17,22 @@ config :cds, CdsWeb.Endpoint,
   pubsub: [name: Cds.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
+
+config :guardian, Guardian,
+  	issuer: "Cds",
+  	ttl: { 30, :days },
+  	verify_issuer: true,
+  	secret_key: "JMF9Gqn/kmX00iDdqabz2JCPsVPVwQD6M3+OiqCdwBbsMatvMvXKQtJqj8OobCBM",
+  	serializer: Cds.GuardianSerializer,
+	permissions: %{
+		default: [:read],
+		admin: [:read, :write, :manage]
+    }
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

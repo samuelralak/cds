@@ -1,6 +1,5 @@
 defmodule CdsWeb.SearchView do
 	use CdsWeb, :view
-	alias CdsWeb.SearchView
 
 	def render("index.json", %{results: results, query: query}) do
 		%{
