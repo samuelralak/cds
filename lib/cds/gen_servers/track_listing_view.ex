@@ -20,7 +20,7 @@ defmodule Cds.TrackListingView do
 	end
 
 	def handle_cast({:track, {ip, id}}, state) do
-		case Repo.all(from v in View, where: v.ip_address == ^ip) do
+		case Repo.all(from v in View, where: v.ip_address == ^ip and v.business_id == ^id) do
 			[] ->
 				listing = Repo.get!(Business, String.to_integer(id))
 				case create_view(listing, %{ip_address: ip}) do
